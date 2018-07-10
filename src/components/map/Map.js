@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Map.css'
 
 class GoogleMap extends Component {
 
@@ -15,9 +16,9 @@ class GoogleMap extends Component {
 
   render(){
     const mapStyle = {
-      width: 500,
-      height: 300,
-      border: '1px solid black'
+      width: '100%',
+      height: 700,
+      padding: '1%'
     };
     return (
       <div ref="map" style={mapStyle}>I should be a map!</div>
