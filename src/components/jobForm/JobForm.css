@@ -1,0 +1,15 @@
+.job-form-container {
+  padding: 1%;
+  z-index: 20;
+  width: 100%;
+  height: 700px;
+  position: absolute;
+}
+
+.job-form {
+  width: 50%;
+  height: 70%;
+  background-color: #F6F6F4;
+  margin: auto;
+  padding: 2%;
+}
