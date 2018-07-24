@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import JobForm from '../jobForm/JobForm';
 import Map from '../map/Map';
 import './Home.css'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class Home extends Component {
   state = {
@@ -14,7 +16,6 @@ class Home extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log(event.target);
     this.setState({ show: false })
   }
 
@@ -32,4 +33,18 @@ class Home extends Component {
   }
 }
 
-export default Home;
+function mapStateToProps(state){
+  const { jobs } = state.jobs.searchedJobs;
+
+  return {
+    jobs,
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

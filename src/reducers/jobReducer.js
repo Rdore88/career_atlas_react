@@ -1,7 +1,7 @@
 import update from 'immutability-helper';
 
 const initialState = {
-    searchedJobs: null,
+    searchedJobs: [],
 }
 
 const jobReducer = function(state = initialState, action){
