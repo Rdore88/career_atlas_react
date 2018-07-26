@@ -1,4 +1,4 @@
-import api from './axiosConfig';
+import {api} from './axiosConfig';
 
 function setJobs(jobs){
     return {
@@ -8,9 +8,11 @@ function setJobs(jobs){
 }
 
 export function searchJobs(params){
-    api.searchJobs("/jobs/searchAll", params)
-    .then(response => {
-        console.log(response);
-    })
-    .catch(error => console.log(err))
+    return dispatch => {
+        api.searchJobs("/api/jobs/searchAll", params)
+        .then(response => {
+            dispatch(setJobs(response.data));
+        })
+        .catch(err => console.log(err))
+    }
 }

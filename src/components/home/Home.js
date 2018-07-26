@@ -4,6 +4,7 @@ import Map from '../map/Map';
 import './Home.css'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { searchJobs } from '../../actions/jobActions';
 
 class Home extends Component {
   state = {
@@ -16,6 +17,8 @@ class Home extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    const { show, ...searchParams } = this.state;
+    this.props.searchJobs(searchParams);
     this.setState({ show: false })
   }
 
@@ -24,6 +27,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.props.jobs);
     return (
       <div>
         <JobForm handleSubmit={this.handleSubmit} state={this.state} handleChange={this.handleChange}/>
@@ -34,16 +38,15 @@ class Home extends Component {
 }
 
 function mapStateToProps(state){
-  const { jobs } = state.jobs.searchedJobs;
 
   return {
-    jobs,
+    jobs: state.jobs.searchedJobs,
   }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-
+    searchJobs,
   }, dispatch)
 }
 
