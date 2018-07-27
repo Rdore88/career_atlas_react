@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import JobForm from '../jobForm/JobForm';
-import Map from '../map/Map';
 import './Home.css'
+import './Map.css'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { searchJobs } from '../../actions/jobActions';
@@ -15,6 +15,17 @@ class Home extends Component {
     location: '',
   }
 
+  componentDidMount() {
+    const ATLANTA = {
+      lat: 33.7490,
+      lng: -84.3880
+    };
+    this.map = new window.google.maps.Map(this.refs.map, {
+      center: ATLANTA,
+      zoom: 10
+    });
+  }
+
   handleSubmit = event => {
     event.preventDefault()
     const { show, ...searchParams } = this.state;
@@ -26,12 +37,31 @@ class Home extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  addMarkers = () => {
+    let jobs = this.props.jobs;
+    console.log(jobs);
+    jobs.forEach(job => {
+      var marker = new window.google.maps.Marker({
+        position: {lat: job.latitude, "lng": job.longitude},
+        map: this.map,
+        title: job.jobTitle,
+      })
+    })
+  }
+
   render() {
-    console.log(this.props.jobs);
+    const mapStyle = {
+      width: '100%',
+      height: 700,
+      padding: '1%'
+    }
+    if(this.props.jobs.length > 0) {
+      this.addMarkers();
+    }
     return (
       <div>
         <JobForm handleSubmit={this.handleSubmit} state={this.state} handleChange={this.handleChange}/>
-        <Map />
+        <div ref="map" style={mapStyle}>I should be a map!</div>
       </div>
     )
   }
