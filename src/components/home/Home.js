@@ -39,14 +39,20 @@ class Home extends Component {
 
   addMarkers = () => {
     let jobs = this.props.jobs;
-    console.log(jobs);
+    let bounds = new window.google.maps.LatLngBounds;
+
     jobs.forEach(job => {
       var marker = new window.google.maps.Marker({
         position: {lat: job.latitude, "lng": job.longitude},
         map: this.map,
         title: job.jobTitle,
+        animation: window.google.maps.Animation.DROP,
       })
+      let locationOfPin = new window.google.maps.LatLng(marker.position.lat(), marker.position.lng());
+      bounds.extend(locationOfPin);
     })
+    this.map.fitBounds(bounds);
+    this.map.panToBounds(bounds);
   }
 
   render() {
