@@ -70,7 +70,7 @@ class Home extends Component {
 
   addMarkers = () => {
     let jobs = this.props.jobs;
-    let bounds = new window.google.maps.LatLngBounds;
+    let bounds = new window.google.maps.LatLngBounds();
     let markers = [];
     jobs.forEach(job => {
       var marker = new window.google.maps.Marker({
