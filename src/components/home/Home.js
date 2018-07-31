@@ -5,6 +5,7 @@ import './Map.css'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { searchJobs } from '../../actions/jobActions';
+import JobInfo from '../jobInfo/JobInfo';
 
 class Home extends Component {
   state = {
@@ -13,6 +14,11 @@ class Home extends Component {
     jobType: '',
     distance: '',
     location: '',
+    modal: {
+      show: false, 
+      job: null 
+    },
+    markers: []
   }
 
   componentDidMount() {
@@ -28,19 +34,44 @@ class Home extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const { show, ...searchParams } = this.state;
-    this.props.searchJobs(searchParams);
-    this.setState({ show: false })
+    const { show, modal, markers, ...searchParams } = this.state;
+    this.props.searchJobs(searchParams)
+    .then(res => {
+      // TODO: add error handling
+      this.setState({ show: false })
+      this.addMarkers();
+    })
+    .catch(err => console.log(err))
+   
   }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  handlePinClick = job => {
+    this.setState({
+      modal: {
+        show: true,
+        job,
+      }
+    })
+    
+  }
+
+  handleHide = event => {
+    this.setState({
+      modal: {
+        show: false,
+        job: null
+      }
+    })
+  }
+
   addMarkers = () => {
     let jobs = this.props.jobs;
     let bounds = new window.google.maps.LatLngBounds;
-
+    let markers = [];
     jobs.forEach(job => {
       var marker = new window.google.maps.Marker({
         position: {lat: job.latitude, "lng": job.longitude},
@@ -50,9 +81,12 @@ class Home extends Component {
       })
       let locationOfPin = new window.google.maps.LatLng(marker.position.lat(), marker.position.lng());
       bounds.extend(locationOfPin);
+      marker.addListener('click', () => this.handlePinClick(job));
+      markers.push(marker);
     })
     this.map.fitBounds(bounds);
     this.map.panToBounds(bounds);
+    this.setState({ markers: markers })
   }
 
   render() {
@@ -61,12 +95,10 @@ class Home extends Component {
       height: 700,
       padding: '1%'
     }
-    if(this.props.jobs.length > 0) {
-      this.addMarkers();
-    }
     return (
       <div>
         <JobForm handleSubmit={this.handleSubmit} state={this.state} handleChange={this.handleChange}/>
+        <JobInfo state={this.state.modal} handleHide={this.handleHide}/>
         <div ref="map" style={mapStyle}>I should be a map!</div>
       </div>
     )

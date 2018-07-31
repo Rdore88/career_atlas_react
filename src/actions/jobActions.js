@@ -1,4 +1,5 @@
 import {api} from './axiosConfig';
+import { toUnicode } from 'punycode';
 
 function setJobs(jobs){
     return {
@@ -7,11 +8,13 @@ function setJobs(jobs){
     }
 }
 
+// TODO: Add better error handling
 export function searchJobs(params){
     return dispatch => {
-        api.searchJobs("/api/jobs/searchAll", params)
+        return api.searchJobs("/api/jobs/searchAll", params)
         .then(response => {
             dispatch(setJobs(response.data));
+            return true
         })
         .catch(err => console.log(err))
     }
