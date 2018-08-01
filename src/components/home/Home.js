@@ -6,20 +6,26 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { searchJobs } from '../../actions/jobActions';
 import JobInfo from '../jobInfo/JobInfo';
+import SearchButton from '../searchButton/SearchButton';
 
 class Home extends Component {
-  state = {
-    show: true,
-    jobTitle: '',
-    jobType: '',
-    distance: '',
-    location: '',
-    modal: {
-      show: false, 
-      job: null 
-    },
-    markers: []
+
+  getInitialState = () => {
+    return {
+      show: true,
+      jobTitle: '',
+      jobType: '',
+      distance: '',
+      location: '',
+      modal: {
+        show: false,
+        job: null
+      },
+      markers: []
+    }
   }
+
+  state = this.getInitialState();
 
   componentDidMount() {
     const ATLANTA = {
@@ -68,6 +74,17 @@ class Home extends Component {
     })
   }
 
+  setMapOnAll = map => {
+    this.state.markers.forEach(marker => {
+      marker.setMap(map)
+    })
+  }
+
+  handleNewSearch = () => {
+    this.setMapOnAll(null)
+    this.setState(this.getInitialState())
+  }
+
   addMarkers = () => {
     let jobs = this.props.jobs;
     let bounds = new window.google.maps.LatLngBounds();
@@ -91,14 +108,17 @@ class Home extends Component {
 
   render() {
     const mapStyle = {
-      width: '100%',
+      width: '99%',
       height: 700,
-      padding: '1%'
+      padding: '1%',
+      margin: 'auto',
+      borderRadius: '1%' 
     }
     return (
       <div>
         <JobForm handleSubmit={this.handleSubmit} state={this.state} handleChange={this.handleChange}/>
         <JobInfo state={this.state.modal} handleHide={this.handleHide}/>
+        <SearchButton handleNewSearch={this.handleNewSearch} show={this.state.markers.length > 0} />
         <div ref="map" style={mapStyle}>I should be a map!</div>
       </div>
     )
