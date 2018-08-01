@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import JobForm from '../jobForm/JobForm';
-import './Home.css'
-import './Map.css'
+import './Home.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { searchJobs } from '../../actions/jobActions';
