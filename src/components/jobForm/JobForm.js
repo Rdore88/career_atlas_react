@@ -5,8 +5,8 @@ import './JobForm.css'
 
 class JobForm extends Component {
   render() {
-    let { show, jobTitle, jobType, distance, location } = this.props.state;
-    let { handleSubmit, handleChange } = this.props;
+    let { jobTitle, jobType, distance, location } = this.props.state;
+    let { handleSubmit, handleChange, show } = this.props;
     
       if (show) {
         return (

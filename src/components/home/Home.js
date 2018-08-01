@@ -12,7 +12,6 @@ class Home extends Component {
 
   getInitialState = () => {
     return {
-      show: true,
       jobTitle: '',
       jobType: '',
       distance: '',
@@ -40,11 +39,10 @@ class Home extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const { show, modal, markers, ...searchParams } = this.state;
+    const { modal, markers, ...searchParams } = this.state;
     this.props.searchJobs(searchParams)
     .then(res => {
       // TODO: add error handling
-      this.setState({ show: false })
       this.addMarkers();
     })
     .catch(err => console.log(err))
@@ -116,7 +114,7 @@ class Home extends Component {
     }
     return (
       <div>
-        <JobForm handleSubmit={this.handleSubmit} state={this.state} handleChange={this.handleChange}/>
+        <JobForm handleSubmit={this.handleSubmit} state={this.state} handleChange={this.handleChange} show={!this.state.markers.length > 0}/>
         <JobInfo state={this.state.modal} handleHide={this.handleHide}/>
         <SearchButton handleNewSearch={this.handleNewSearch} show={this.state.markers.length > 0} />
         <div ref="map" style={mapStyle}>I should be a map!</div>
