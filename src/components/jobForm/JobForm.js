@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, HelpBlock } from 'react-bootstrap';
-import Home from '../home/Home';
 import './JobForm.css'
 
 class JobForm extends Component {
