@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { searchJobs } from '../../actions/jobActions';
 import JobInfo from '../jobInfo/JobInfo';
 import SearchButton from '../searchButton/SearchButton';
+import Footer from '../footer/Footer';
 
 class Home extends Component {
 
@@ -117,6 +118,7 @@ class Home extends Component {
         <JobInfo state={this.state.modal} handleHide={this.handleHide}/>
         <SearchButton handleNewSearch={this.handleNewSearch} show={this.state.markers.length > 0} />
         <div ref="map" style={mapStyle}>I should be a map!</div>
+        <Footer />
       </div>
     )
   }
