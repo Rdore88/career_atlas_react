@@ -34,6 +34,10 @@ class Home extends Component {
       center: ATLANTA,
       zoom: 10
     });
+
+    if(this.props.jobs.length > 0 && this.state.markers.length === 0){
+      this.addMarkers();
+    }
   }
 
   handleSubmit = event => {
@@ -123,7 +127,7 @@ class Home extends Component {
 }
 
 function mapStateToProps(state){
-
+  
   return {
     jobs: state.jobs.searchedJobs,
   }
