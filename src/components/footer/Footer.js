@@ -11,8 +11,12 @@ class Footer extends Component {
                         <img alt="Indeed" src={IndeedImage} />
                     </a>
                 </p>
-                <p id='issues-comments'>
-                    <a href='https://github.com/Rdore88/career_atlas_react/issues'> Issues 
+                <p class='issues-comments'>
+                    <a href='https://github.com/Rdore88/career_atlas_react/issues'> Front End Issues
+                    </a>
+                </p>
+                <p class='issues-comments'>
+                    <a href='https://github.com/Rdore88/BE_career_atlas/issues'> Backend Issues Issues
                     </a>
                 </p>
             </div>   
