@@ -41,20 +41,21 @@ class Home extends Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault()
+    event.preventDefault();
     const { modal, markers, ...searchParams } = this.state;
     this.props.searchJobs(searchParams)
     .then(res => {
       // TODO: add error handling
       this.addMarkers();
+        console.log(this.props.jobs);
     })
     .catch(err => console.log(err))
    
-  }
+  };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
-  }
+  };
 
   handlePinClick = job => {
     this.setState({
@@ -64,7 +65,7 @@ class Home extends Component {
       }
     })
     
-  }
+  };
 
   handleHide = event => {
     this.setState({
@@ -73,39 +74,39 @@ class Home extends Component {
         job: null
       }
     })
-  }
+  };
 
   setMapOnAll = map => {
     this.state.markers.forEach(marker => {
       marker.setMap(map)
     })
-  }
+  };
 
   handleNewSearch = () => {
-    this.setMapOnAll(null)
+    this.setMapOnAll(null);
     this.setState(this.getInitialState())
-  }
+  };
 
   addMarkers = () => {
     let jobs = this.props.jobs;
     let bounds = new window.google.maps.LatLngBounds();
     let markers = [];
     jobs.forEach(job => {
-      var marker = new window.google.maps.Marker({
-        position: {lat: job.latitude, "lng": job.longitude},
+      let marker = new window.google.maps.Marker({
+        position: {lat: parseFloat(job.latitude), lng: parseFloat(job.longitude)},
         map: this.map,
         title: job.jobTitle,
         animation: window.google.maps.Animation.DROP,
-      })
+      });
       let locationOfPin = new window.google.maps.LatLng(marker.position.lat(), marker.position.lng());
       bounds.extend(locationOfPin);
       marker.addListener('click', () => this.handlePinClick(job));
       markers.push(marker);
-    })
+    });
     this.map.fitBounds(bounds);
     this.map.panToBounds(bounds);
     this.setState({ markers: markers })
-  }
+  };
 
   render() {
     const mapStyle = {
@@ -127,7 +128,6 @@ class Home extends Component {
 }
 
 function mapStateToProps(state){
-  
   return {
     jobs: state.jobs.searchedJobs,
   }
