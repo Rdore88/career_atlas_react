@@ -10,7 +10,7 @@ function setJobs(jobs){
 // TODO: Add better error handling
 export function searchJobs(params){
     return dispatch => {
-        return api.searchJobs("/api/jobs/searchAll", params)
+        return api.searchJobs("/jobSearch/indeed", params)
         .then(response => {
             dispatch(setJobs(response.data));
             return true
