@@ -8,12 +8,15 @@ class JobInfo extends Component {
            return (
                <Modal show={show} onHide={this.props.handleHide} >
                    <Modal.Header closeButton>
-                       <Modal.Title>{job.jobTitle}</Modal.Title>
+                       <Modal.Title>Company: {job.company}</Modal.Title>
                    </Modal.Header>
                    <Modal.Body>
-                       <h3>Company: {job.company}</h3>
-                       <p>click <a target="_blank" rel="noopener noreferrer" href={job.url}>here</a> to apply</p>
+                       <p>Job Title: {job.positionTitle}</p>
+                       <p>{job.snippet}</p>
                    </Modal.Body>
+                   <Modal.Footer>
+                       <p>Apply now <a target="_blank" rel="noopener noreferrer" href={job.url}>here</a>!</p>
+                   </Modal.Footer>
                </Modal>
            )
        } else {
