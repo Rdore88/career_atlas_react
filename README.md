@@ -4,12 +4,12 @@ This is a new way to search for jobs! Career Atlas is a location based job searc
 
 ## Getting started
 
-Make sure you have the correct versions of npm for this project
+Make sure you have the correct versions of yarn for this project
 
 ```
 $ node -v
 v8.7.0
-$ npm -v
+$ yarn -v
 6.0.0
 ```
 
@@ -18,14 +18,14 @@ If you do not have node or npm, use [homebrew](https://brew.sh/) to install or u
 
 ```
 $ brew install node
-$ brew install npm
+$ brew install yarn
 ```
 
-if you have the wrong version you can use homebrew to update node and npm with the following commands:
+if you have the wrong version you can use homebrew to update node and yarn with the following commands:
 
 ```
 $ brew upgrade node
-$ brew upgrade npm
+$ brew upgrade yarn
 ```
 
 ### Env Variables
@@ -36,13 +36,13 @@ You will need to sign up for a google developer account
 ### To get running on your computer
 
 1. Clone this repo to your computer
-2. run `npm install` to make sure all dependencies are installed
+2. run `yarn install` to make sure all dependencies are installed
 3. Make sure to have all needed Env variables and accounts set up
 4. download and set up the [CareerAtlas Backend](https://github.com/Rdore88/career_atlas_node)
-5. run `npm start` to start the app
+5. run `yarn start` to start the app
 
 ### How to use
-Simply setup and startsearching! No log in or in app setup required
+Simply setup and start searching! No log in or in app setup required
 
 ### Testing
 Coming Soon!
