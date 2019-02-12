@@ -10,7 +10,7 @@ Make sure you have the correct versions of yarn for this project
 $ node -v
 v8.7.0
 $ yarn -v
-6.0.0
+1.13.0
 ```
 
 ### Installing Node and npm
