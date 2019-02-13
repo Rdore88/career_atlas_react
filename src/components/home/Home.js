@@ -47,7 +47,6 @@ class Home extends Component {
     .then(res => {
       // TODO: add error handling
       this.addMarkers();
-        console.log(this.props.jobs);
     })
     .catch(err => console.log(err))
    
